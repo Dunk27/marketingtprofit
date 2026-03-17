@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Т-Профит — Digital Marketing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blue: #3B6FD4;
+            --blue-light: #5B8FE8;
+            --blue-dark: #2A52A8;
+            --white: #FFFFFF;
+            --black: #000000;
+            --bg: #050507;
+            --bg2: #090910;
+            --surface: #0E0E18;
+            --surface2: #12121F;
+            --border: rgba(59,111,212,0.18);
+            --text-muted: rgba(255,255,255,0.45);
+            --text-secondary: rgba(255,255,255,0.72);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* ─── GRID OVERLAY ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(59,111,212,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59,111,212,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 48px;
+            background: rgba(5,5,7,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        .logo-text {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span { color: var(--blue); }
+
+        .nav-cta {
+            background: var(--blue);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .nav-cta:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+        /* ─── SECTIONS ─── */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(59,111,212,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59,111,212,0.12);
+            border: 1px solid rgba(59,111,212,0.3);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--blue-light);
+            margin-bottom: 36px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: var(--blue);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .hero h1 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2.6rem, 6vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+            max-width: 900px;
+        }
+
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--blue-light), var(--white));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+            font-weight: 500;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 80px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--blue);
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 0 40px rgba(59,111,212,0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(59,111,212,0.5);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--white);
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: all 0.25s;
+        }
+
+        .btn-ghost:hover { border-color: var(--blue); color: var(--blue-light); }
+
+        .hero-stats {
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+        .stat {
+            padding: 28px 48px;
+            border-right: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat:last-child { border-right: none; }
+
+        .stat-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--blue-light);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .stat-lbl {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ─── SECTION COMMON ─── */
+        .s-wrap {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 100px 48px;
+        }
+
+        .s-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--blue-light);
+            margin-bottom: 12px;
+        }
+
+        .s-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .s-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 560px;
+        }
+
+        .s-head {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: end;
+            margin-bottom: 64px;
+        }
+
+        /* ─── SERVICES ─── */
+        .services { background: var(--bg2); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--blue), var(--blue-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(59,111,212,0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(59,111,212,0.12);
+        }
+
+        .card:hover::after { transform: scaleX(1); }
+
+        .card-ico {
+            width: 52px; height: 52px;
+            background: rgba(59,111,212,0.12);
+            border: 1px solid rgba(59,111,212,0.25);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .card-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--blue-light);
+            margin-bottom: 16px;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .card-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .card-list li {
+            font-size: 0.83rem;
+            color: var(--text-secondary);
+            padding: 5px 0 5px 20px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .card-list li::before {
+            content: '↗';
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-size: 0.75rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: rgba(59,111,212,0.1);
+            border: 1px solid rgba(59,111,212,0.2);
+            color: var(--blue-light);
+            font-size: 0.75rem;
+            padding: 5px 12px;
+            border-radius: 6px;
+        }
+
+        /* featured card */
+        .card.featured {
+            background: linear-gradient(145deg, #0D1B3E, #0A1225);
+            border-color: rgba(59,111,212,0.4);
+            grid-column: span 1;
+        }
+
+        /* ─── WHY ─── */
+        .why { background: var(--bg); }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .why-item {
+            background: var(--surface);
+            padding: 40px 32px;
+            border-right: 1px solid var(--border);
+            transition: background 0.3s;
+        }
+
+        .why-item:last-child { border-right: none; }
+        .why-item:hover { background: var(--surface2); }
+
+        .why-num {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(59,111,212,0.18);
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .why-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .why-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* ─── PROCESS ─── */
+        .process { background: var(--bg2); }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 28px; left: 12.5%; right: 12.5%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--blue), transparent);
+        }
+
+        .step {
+            padding: 0 24px 0 0;
+            text-align: left;
+        }
+
+        .step-dot {
+            width: 56px; height: 56px;
+            background: var(--surface2);
+            border: 2px solid var(--blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--blue-light);
+            margin-bottom: 24px;
+        }
+
+        .step-title {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .step-text {
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ─── CTA ─── */
+        .cta-section {
+            background: var(--bg);
+            padding: 0 48px 120px;
+        }
+
+        .cta-box {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0D1B3E 0%, #0A1225 60%, #060D1F 100%);
+            border: 1px solid rgba(59,111,212,0.35);
+            border-radius: 24px;
+            padding: 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -40%; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 300px;
+            background: radial-gradient(ellipse, rgba(59,111,212,0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-box h2 {
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .cta-checks {
+            display: flex;
+            gap: 32px;
+            justify-content: center;
+            margin-top: 36px;
+            position: relative;
+        }
+
+        .cta-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .cta-check svg { color: var(--blue-light); flex-shrink: 0; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer .logo-text { font-size: 0.9rem; }
+        .footer-copy { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* ─── SCROLL ANIM ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        }
+
+        .reveal.in { opacity: 1; transform: none; }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
+            .why-item { border-bottom: 1px solid var(--border); }
+            .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .process-steps::before { display: none; }
+            .s-head { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .s-wrap { padding: 72px 24px; }
+            .hero-stats { flex-direction: column; border-radius: 12px; }
+            .stat { border-right: none; border-bottom: 1px solid var(--border); }
+            .stat:last-child { border-bottom: none; }
+            .services-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .cta-box { padding: 48px 28px; }
+            .cta-checks { flex-direction: column; align-items: center; gap: 16px; }
+            footer { flex-direction: column; gap: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M85 15L20 55L55 70L85 15Z" fill="#3B6FD4" rx="8"/>
+            <path d="M55 70L35 100L70 80L55 70Z" fill="#3B6FD4"/>
+        </svg>
+        <span class="logo-text">Т-<span>Профит</span></span>
+    </div>
+    <a href="https://t.me/tprofitK" target="_blank" class="nav-cta">Получить консультацию →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-eyebrow">Digital Marketing · Рост продаж</div>
+    <h1>
+        Ваш маркетинг<br>
+        <span class="accent">превращает деньги в прибыль</span>
+    </h1>
+    <p class="hero-sub">Мы берём ответственность за результат. Не лиды — а клиенты. Не трафик — а выручка. Работаем как продолжение вашего отдела продаж.</p>
+    <div class="hero-btns">
+        <a href="https://t.me/tprofitK" target="_blank" class="btn-primary">
+            Начать рост сегодня
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost">Смотреть услуги</a>
+    </div>
+    <div class="hero-stats reveal">
+        <div class="stat">
+            <div class="stat-num">200+</div>
+            <div class="stat-lbl">Проектов в портфеле</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">×3.5</div>
+            <div class="stat-lbl">Средний рост ROI</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">8 лет</div>
+            <div class="stat-lbl">На рынке digital</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">48ч</div>
+            <div class="stat-lbl">До первых лидов</div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+    <div class="s-wrap">
+        <div class="s-head reveal">
+            <div>
+                <div class="s-tag">Наши услуги</div>
+                <h2 class="s-title">Инструменты,<br>которые продают</h2>
+            </div>
+            <p class="s-desc">Каждый канал настраивается под экономику вашего бизнеса. Никакого «запускаем и смотрим» — только стратегия с чёткими KPI.</p>
+        </div>
+
+        <div class="services-grid">
+
+            <div class="card featured reveal reveal-delay-1">
+                <div class="card-ico">🎯</div>
+                <div class="card-title">Яндекс Директ</div>
+                <div class="card-price">55 000 ₽/мес</div>
+                <p class="card-desc">Горячие клиенты в момент, когда они уже ищут вас. Платите только за тех, кто готов купить — не за охват.</p>
+                <ul class="card-list">
+                    <li>Снижаем стоимость клика на 20–40% за 2 недели</li>
+                    <li>Сертифицированные специалисты Яндекса</li>
+                    <li>A/B тесты объявлений каждые 2 недели</li>
+                </ul>
+                <span class="card-tag">Услуги · Магазины · B2B</span>
+            </div>
+
+            <div class="card reveal reveal-delay-2">
+                <div class="card-ico">📱</div>
+                <div class="card-title">Авито ПРО</div>
+                <div class="card-price">40 000 ₽/мес</div>
+                <p class="card-desc">60+ млн покупателей. Конкуренты платят за поднятие — мы получаем его органически за счёт алгоритмов.</p>
+                <ul class="card-list">
+                    <li>Конверсия на 35% выше среднего по платформе</li>
+                    <li>Продающие тексты + фото-стратегия</li>
+                    <li>Стоимость лида ниже Директа в 2–4 раза</li>
+                </ul>
+                <span class="card-tag">Локальный бизнес · Ремонт · Доставка</span>
+            </div>
+
+            <div class="card reveal reveal-delay-3">
+                <div class="card-ico">📊</div>
+                <div class="card-title">SEO-оптимизация</div>
+                <div class="card-price">55 000 ₽/мес</div>
+                <p class="card-desc">Трафик без бюджета на клики. Через 3–6 месяцев ваш сайт работает на вас 24/7 бесплатно.</p>
+                <ul class="card-list">
+                    <li>Гарантия: 10+ запросов в ТОП-3</li>
+                    <li>Google Мой Бизнес + локальное SEO</li>
+                    <li>Фокус только на коммерческие запросы</li>
+                </ul>
+                <span class="card-tag">Недвижимость · Строительство · B2B</span>
+            </div>
+
+            <div class="card reveal">
+                <div class="card-ico">💬</div>
+                <div class="card-title">SMM и таргет</div>
+                <div class="card-price">от 40 000 ₽/мес</div>
+                <p class="card-desc">Подписчики — это не цель. Цель — продажи. Строим воронку от охвата до чека.</p>
+                <ul class="card-list">
+                    <li>Рост подписной базы 15–30% в месяц</li>
+                    <li>Стратегия контента на 3 месяца вперёд</li>
+                    <li>Работа с нано- и микроинфлюенсерами</li>
+                </ul>
+                <span class="card-tag">Бренды · Fashion · HoReCa</span>
+            </div>
+
+            <div class="card reveal reveal-delay-1">
+                <div class="card-ico">🤖</div>
+                <div class="card-title">Телемаркетинг</div>
+                <div class="card-price">70 000 ₽/мес</div>
+                <p class="card-desc">Прямой разговор с лицом, принимающим решение. Закрываем возражения там, где реклама бессильна.</p>
+                <ul class="card-list">
+                    <li>Конверсия в назначение встречи 15–25%</li>
+                    <li>Скрипты написаны под вашу нишу</li>
+                    <li>Операторы с отраслевым опытом</li>
+                </ul>
+                <span class="card-tag">B2B · Страхование · Обучение</span>
+            </div>
+
+            <div class="card reveal reveal-delay-2">
+                <div class="card-ico">🌐</div>
+                <div class="card-title">Разработка сайта</div>
+                <div class="card-price">от 53 000 ₽</div>
+                <p class="card-desc">Не «визитка», а продавец. Сайт, который работает в 03:00, пока вы спите, и приносит заявки утром.</p>
+                <ul class="card-list">
+                    <li>Продающая структура по CRO-методологии</li>
+                    <li>Адаптив + SEO-оптимизация в коде</li>
+                    <li>Поддержка 3 месяца бесплатно</li>
+                </ul>
+                <span class="card-tag">Любой бизнес</span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+    <div class="s-wrap">
+        <div class="s-head reveal">
+            <div>
+                <div class="s-tag">Почему Т-Профит</div>
+                <h2 class="s-title">Мы говорим<br>языком цифр</h2>
+            </div>
+            <p class="s-desc">Красивые слова не окупают рекламный бюджет. Мы отчитываемся только измеримыми показателями.</p>
+        </div>
+        <div class="why-grid reveal">
+            <div class="why-item">
+                <div class="why-num">01</div>
+                <div class="why-title">Запуск за 48 часов</div>
+                <p class="why-text">Первые лиды — не через месяц «согласований». Рекламная кампания работает уже через двое суток после старта.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-num">02</div>
+                <div class="why-title">Прозрачная отчётность</div>
+                <p class="why-text">Каждую неделю — дашборд с ROI, стоимостью лида и конверсией. Вы видите ровно то, за что платите.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-num">03</div>
+                <div class="why-title">Сертифицированная команда</div>
+                <p class="why-text">Специалисты Яндекса и Meta с подтверждёнными сертификатами. 8+ лет работы в реальных проектах, не теория.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-num">04</div>
+                <div class="why-title">Юридические гарантии</div>
+                <p class="why-text">Официальный договор с прописанными KPI. НДС в наличии. Ответственность закреплена на бумаге — не на словах.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+    <div class="s-wrap">
+        <div class="s-head reveal">
+            <div>
+                <div class="s-tag">Как мы работаем</div>
+                <h2 class="s-title">От звонка<br>до первых продаж</h2>
+            </div>
+            <p class="s-desc">Чёткий процесс без воды. Знаете, что происходит на каждом этапе и сколько времени займёт.</p>
+        </div>
+        <div class="process-steps reveal">
+            <div class="step">
+                <div class="step-dot">01</div>
+                <div class="step-title">Аудит и стратегия</div>
+                <p class="step-text">Анализируем конкурентов, нишу и текущие каналы. Выявляем точки роста. Предлагаем стратегию с прогнозом ROI.</p>
+            </div>
+            <div class="step">
+                <div class="step-dot">02</div>
+                <div class="step-title">Настройка и запуск</div>
+                <p class="step-text">Настраиваем рекламные инструменты, создаём материалы, интегрируем аналитику. Старт — 48 часов.</p>
+            </div>
+            <div class="step">
+                <div class="step-dot">03</div>
+                <div class="step-title">Оптимизация</div>
+                <p class="step-text">Еженедельно тестируем гипотезы, режем неэффективное, усиливаем то, что работает. Постоянный рост.</p>
+            </div>
+            <div class="step">
+                <div class="step-dot">04</div>
+                <div class="step-title">Отчёт и масштаб</div>
+                <p class="step-text">Ежемесячная встреча с дашбордом. Обсуждаем результаты и принимаем решение о масштабировании.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-box reveal">
+        <h2>Готовы к реальному росту?</h2>
+        <p>Бесплатный аудит текущего маркетинга + персональная стратегия роста.<br>Без обязательств. Результат разбора — ваш вне зависимости от дальнейшего решения.</p>
+        <a href="https://t.me/tprofitK" target="_blank" class="btn-primary" style="font-size:1.1rem; padding: 18px 44px;">
+            Получить консультацию
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="cta-checks">
+            <div class="cta-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B8FE8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Бесплатно
+            </div>
+            <div class="cta-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B8FE8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Без обязательств
+            </div>
+            <div class="cta-check">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B8FE8" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Ответ в течение 15 минут
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M85 15L20 55L55 70L85 15Z" fill="#3B6FD4"/>
+            <path d="M55 70L35 100L70 80L55 70Z" fill="#3B6FD4"/>
+        </svg>
+        <span class="logo-text">Т-<span>Профит</span></span>
+    </div>
+    <div class="footer-copy">© 2025 Т-Профит. Digital Marketing Agency</div>
+</footer>
+
+<script>
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
